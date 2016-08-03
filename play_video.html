@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+video{
+ position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    
+    background-size: cover; 
+}
+</style>
+<script type="text/javascript">
+    
+	var enableAutoplay = function () {
+	var vid = document.getElementById("backgroundvid");
+	console.log(vid);
+		vid.autoplay = true;
+		vid.load();
+		vid.play();
+		//console.log(vid.seekable.end(1));   
+	}
+	
+	window.onload = enableAutoplay;
+	function gotoWinner(){
+		window.location.replace("luckydraw.html");
+
+	}
+	
+</script> 
+</head>
+<body>
+
+<video width="400" controls id="backgroundvid" onended="gotoWinner()">
+  <source src="movie.mp4" type="video/mp4">
+</video>
+</body>
+</html>
+

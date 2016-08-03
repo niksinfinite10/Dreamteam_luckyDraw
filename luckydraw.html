@@ -1,0 +1,171 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="./compiled/flipclock.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="./compiled/flipclock.js"></script>
+		<link rel="stylesheet" href="css/common.css">
+	  <link rel="stylesheet" href="css/demo.css">
+
+	  <!-- modernizr -->
+	  <script src="js/common/modernizr.js"></script>
+	</head>
+	<body >
+		<div  style="background-image: url('./img/background.jpg');height:100%;" >
+		
+		
+		<div class="wrapper">
+
+
+  <main >
+    <div class="container" style="margin-top:13%;">
+
+      <div class="section">
+
+
+      <div class="section">
+        <h2 class="section__title" style="margin-top:-10%;margin-bottom:13%;">Lucky Winner </h2>
+        <div id="sectionContent" class="section__content">
+          <div id="card1" class="card effect__random" data-id="1">
+            <div class="card__front">
+              <span id='digit1' class="card__text"  >1</span>
+            </div>
+            <div class="card__back">
+              <span  class="card__text">2</span>
+            </div>
+          </div><!-- /card -->
+
+          <div id="card2" class="card effect__random" data-id="2">
+            <div class="card__front">
+              <span id='digit2' class="card__text">8</span>
+            </div>
+            <div class="card__back">
+              <span  class="card__text">2</span>
+            </div>
+          </div><!-- /card -->
+
+          <div id="card3" class="card effect__random" data-id="3">
+            <div class="card__front">
+              <span id='digit3' class="card__text">0</span>
+            </div>
+            <div class="card__back">
+              <span  class="card__text">3</span>
+            </div>
+          </div><!-- /card -->
+		  
+		  <div id="card30" class="card" >
+              <span  class="card__text">-</span>
+          </div><!-- /card -->
+		      
+          <div id="card4" class="card effect__random" data-id="4">
+            <div class="card__front">
+              <span id='digit4' class="card__text">4</span>
+            </div>
+            <div class="card__back">
+              <span  class="card__text">6</span>
+            </div>
+          </div>
+		  
+		  <div id="card5" class="card effect__random" data-id="5">
+            <div class="card__front">
+              <span id='digit5' class="card__text">2</span>
+            </div>
+            <div class="card__back">
+              <span  class="card__text">5</span>
+            </div>
+          </div>
+		  <div id="card31" class="card" >
+              <span  class="card__text">-</span>
+          </div><!-- /card -->
+		  
+					<div id="card6" class="card effect__random" data-id="6">
+			            <div class="card__front">
+			              <span id='digit6' class="card__text">5</span>
+			            </div>
+			            <div class="card__back">
+			              <span  class="card__text">9</span>
+			            </div>
+			          </div><!-- /card -->
+					  
+					  <div id="card7" class="card effect__random" data-id="7">
+			            <div class="card__front">
+			              <span id='digit7' class="card__text">8</span>
+			            </div>
+			            <div class="card__back">
+			              <span  class="card__text">1</span>
+			            </div>
+			          </div><!-- /card -->
+		</div><!-- /card -->
+
+		
+      </div><!-- /section -->
+
+    </div>
+  </main><!-- /main -->
+
+</div><!-- /#wrapper -->
+
+</div>
+		<!-- demo js -->
+		<script src="js/demo/demo.js"></script>
+
+		<script type="text/javascript">
+
+			var clock;
+			var index=0;
+			var counter = 0;
+			var intervalfunc;
+
+			$(document).ready(function() {
+			
+				
+				$.ajax({url: "/dreamteam_luckyWinner/random.php", success: function(result){
+						if(result)
+						{
+							//console.log('the status is on',result);
+							luckyArr = result;
+							startMe();
+						}
+						else{
+							console.log('theere is some error');
+						}
+						
+					}});
+					
+			 
+				// Attach a click event to a button a decrement the clock
+				function startMe() {
+					var temp = luckyArr.split('-');
+						var myNum='';
+						console.log('temp is ',temp);
+						
+						for(var j=0;j<temp.length;j++){
+						console.log('this is ',temp[j].length+" and number is "+temp[j]);
+							if(temp[j].trim().length==1)
+								temp[j] = '0'+temp[j];
+							myNum+=temp[j];
+							
+						}
+					
+					console.log('my num is ',myNum);
+						intervalfunc =	setInterval(function () {
+						index++;
+						luckyArr=myNum;
+						console.log('lucky array index is',luckyArr[0]);
+		
+						$("#digit"+index).html(luckyArr[index-1]);
+
+
+						document.getElementById("card"+index).className = "card";
+						if(index==7)
+							clearInterval(intervalfunc);
+						
+						}, 1000);
+						
+				}
+
+				
+		});
+		</script>
+
+	</body>
+</html>
